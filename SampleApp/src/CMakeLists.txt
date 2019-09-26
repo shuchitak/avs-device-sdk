@@ -31,7 +31,7 @@ IF (HAS_EXTERNAL_MEDIA_PLAYER_ADAPTERS)
     endforeach(myfile)
 ENDIF()
 
-link_directories("/home/pi/sw_xvf3510/example_host/build")
+link_directories("/home/pi/sw_xvf3510/example_host")
 
 add_executable(SampleApp ${SampleApp_SOURCES})
 

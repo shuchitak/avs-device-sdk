@@ -138,10 +138,9 @@ SampleAppReturnCode UserInputManager::run() {
     m_interactionManager->begin();
     int ret = 0;
     cmdspec_t cmd_spec;
-    char b[] = "GET_VERSION";
-    char *a[] = {b};
+    const char *a[] = {"GET_VERSION"};
 
-    ret = vfctrl_get_cmdspec((char*)a[0], &cmd_spec);
+    ret = vfctrl_get_cmdspec(a[0], &cmd_spec);
     assert(ret == 0);
     int version;
     ret = vfctrl_do_command(&cmd_spec, a, &version);
@@ -189,10 +188,10 @@ SampleAppReturnCode UserInputManager::run() {
 
             int ret = 0;
             cmdspec_t cmd_spec;
-            char b[] = "GET_ERLE_CH0_AEC";
-            char *a[] = {b};
+            const char *a[] = {"GET_ERLE_CH0_AEC"};
 
-            ret = vfctrl_get_cmdspec((char*)a[0], &cmd_spec);
+
+            ret = vfctrl_get_cmdspec(a[0], &cmd_spec);
             assert(ret == 0);
             int version;
             ret = vfctrl_do_command(&cmd_spec, a, &version);

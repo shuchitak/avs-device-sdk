@@ -31,6 +31,10 @@ IF (HAS_EXTERNAL_MEDIA_PLAYER_ADAPTERS)
     endforeach(myfile)
 ENDIF()
 
+link_directories(
+    "/home/pi/sw_xvf3510/example_host/lib"
+    )
+
 add_executable(SampleApp ${SampleApp_SOURCES})
 
 target_include_directories(SampleApp PUBLIC 
@@ -38,6 +42,7 @@ target_include_directories(SampleApp PUBLIC
     "${AudioResources_SOURCE_DIR}/include"
     "${RegistrationManager_SOURCE_DIR}/include"
     "${ESP_SOURCE_DIR}/include"
+    "/home/pi/sw_xvf3510/example_host/api"
     "${PORTAUDIO_INCLUDE_DIR}")
 
 target_link_libraries(SampleApp
@@ -47,6 +52,8 @@ target_link_libraries(SampleApp
     SQLiteStorage
     ESP
     EqualizerImplementations
+    usb-1.0
+    vfctrl
     "${PORTAUDIO_LIB_PATH}")
 
 if (PCC)

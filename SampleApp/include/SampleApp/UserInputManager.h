@@ -24,6 +24,9 @@
 #include "ConsoleReader.h"
 #include "InteractionManager.h"
 #include "SampleApplicationReturnCodes.h"
+#include <libusb-1.0/libusb.h> 
+#include <assert.h>
+
 
 namespace alexaClientSDK {
 namespace sampleApp {
@@ -117,6 +120,7 @@ private:
         CapabilitiesObserverInterface::Error newError) override;
     /// @}
 
+    void init_usb(char *input);
     /// The main interaction manager that interfaces with the SDK.
     std::shared_ptr<InteractionManager> m_interactionManager;
 
@@ -129,6 +133,11 @@ private:
 
     /// Flag to indicate that the @c run() should stop and return @c SampleAppReturnCode::RESTART.
     std::atomic_bool m_restart;
+
+    struct libusb_transfer *xfer = NULL;
+    struct libusb_device_handle *devh = NULL;  
+    unsigned char recv_packet[64] = {0};
+    
 };
 
 }  // namespace sampleApp

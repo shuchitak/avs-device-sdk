@@ -20,7 +20,10 @@
 #include <AVSCommon/Utils/String/StringUtils.h>
 #include "SampleApp/UserInputManager.h"
 #include "SampleApp/ConsolePrinter.h"
+extern "C"
+{
 #include "host_control_api.h"
+}
 
 namespace alexaClientSDK {
 namespace sampleApp {
@@ -183,6 +186,19 @@ SampleAppReturnCode UserInputManager::run() {
             m_interactionManager->holdToggled();
         } else if (x == TAP) {
             m_interactionManager->tap();
+
+            int ret = 0;
+            cmdspec_t cmd_spec;
+            char b[] = "GET_ERLE_CH0_AEC";
+            char *a[] = {b};
+
+            ret = vfctrl_get_cmdspec((char*)a[0], &cmd_spec);
+            assert(ret == 0);
+            int version;
+            ret = vfctrl_do_command(&cmd_spec, a, &version);
+            assert(ret == 0);
+            vfctrl_print_read_result(&cmd_spec, &version);
+
         } else if (x == PLAY) {
             m_interactionManager->playbackPlay();
         } else if (x == PAUSE) {

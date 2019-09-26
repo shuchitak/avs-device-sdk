@@ -33,12 +33,15 @@ ENDIF()
 
 add_executable(SampleApp ${SampleApp_SOURCES})
 
+link_directories("/home/pi/sw_xvf3510/example_host/build")
+
 target_include_directories(SampleApp PUBLIC 
     "${SampleApp_SOURCE_DIR}/include"
     "${AudioResources_SOURCE_DIR}/include"
     "${RegistrationManager_SOURCE_DIR}/include"
     "${ESP_SOURCE_DIR}/include"
-    "${PORTAUDIO_INCLUDE_DIR}")
+    "${PORTAUDIO_INCLUDE_DIR}"
+    "/home/pi/sw_xvf3510/example_host/api")
 
 target_link_libraries(SampleApp
     DefaultClient
@@ -47,6 +50,7 @@ target_link_libraries(SampleApp
     SQLiteStorage
     ESP
     EqualizerImplementations
+    vfctrl_usb
     "${PORTAUDIO_LIB_PATH}")
 
 if (PCC)
